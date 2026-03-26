@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>🎬 Sistema de Recomendación de Películas</h2>
+    <p class="text-muted">Ingresa una descripción y te recomendaremos la película más similar usando IA.</p>
+
+    <form action="" method="get">
+        <div class="mb-3">
+            <label for="prompt" class="form-label">¿Qué tipo de película buscas?</label>
+            <input type="text"
+                   class="form-control"
+                   name="prompt"
+                   id="prompt"
+                   placeholder="Ej: película de aventuras espaciales con héroes"
+                   value="{{ prompt }}"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Recomendar</button>
+    </form>
+
+    {% if prompt %}
+        <hr class="mt-4"/>
+        <h4>Resultados para: <em>"{{ prompt }}"</em></h4>
+
+        {% if recommended_movie %}
+        <div class="card mt-3" style="max-width: 400px;">
+            {% if recommended_movie.image %}
+            <img src="{{ recommended_movie.image.url }}" class="card-img-top" alt="{{ recommended_movie.title }}">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title fw-bold">{{ recommended_movie.title }}</h5>
+                <p class="card-text">{{ recommended_movie.description }}</p>
+                <p class="card-text"><small class="text-muted">Género: {{ recommended_movie.genre }}</small></p>
+                <p class="card-text"><small class="text-muted">Año: {{ recommended_movie.year }}</small></p>
+                <p class="card-text text-success fw-bold">Similitud: {{ similarity_score }}</p>
+                {% if recommended_movie.url %}
+                <a href="{{ recommended_movie.url }}" class="btn btn-primary">Ver más</a>
+                {% endif %}
+            </div>
+        </div>
+        {% else %}
+        <div class="alert alert-warning mt-3">
+            No se encontró ninguna película. Asegúrate de haber generado los embeddings con <code>python manage.py movie_embeddings</code>.
+        </div>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock content %}
