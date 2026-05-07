@@ -34,6 +34,7 @@ En este workshop integraremos herramientas de **Inteligencia Artificial** al pro
 5. [Crear ilustraciones de las películas](5_movie_pictures.md)
 6. [Crear embeddings de las descripciones de las películas](6_movie_similarities.md)
 7. [Implementar el sistema de recomendación](7_movie_recommendations.md)
+8. [Desplegar la app en AWS EC2](8_aws_deployment.md)
 
 ---
 

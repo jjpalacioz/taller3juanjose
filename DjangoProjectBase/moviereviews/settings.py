@@ -31,8 +31,10 @@ SECRET_KEY = 'django-insecure-+9jg)*p09$at+zck$n-6*djf=34w4sc*m##^fmph4pb$_nh%xb
 # Set DJANGO_DEBUG=False in the EC2 environment to disable debug mode.
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True') != 'False'
 
-# Add your EC2 public IP here when deploying, e.g. ALLOWED_HOSTS = ['1.2.3.4', '127.0.0.1', 'localhost']
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+# Add extra hosts via the DJANGO_ALLOWED_HOSTS env var (comma-separated), e.g.:
+#   export DJANGO_ALLOWED_HOSTS="1.2.3.4,ec2-1-2-3-4.compute.amazonaws.com"
+_extra_hosts = [h.strip() for h in os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',') if h.strip()]
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost'] + _extra_hosts
 
 
 # Application definition
@@ -125,6 +127,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# Collected static files go here (used by gunicorn/nginx in production).
+# Run: python3.11 manage.py collectstatic
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
