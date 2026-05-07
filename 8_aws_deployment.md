@@ -208,24 +208,39 @@ kill <PID>
 ## 📝 Resumen de comandos
 
 ```bash
-# Conectarse
-ssh -i tu-clave.pem ubuntu@<PUBLIC_IP>
+# En tu máquina local (reemplaza valores)
+chmod 400 /ruta/tu-clave.pem
+ssh -i /ruta/tu-clave.pem ubuntu@<PUBLIC_IP>
+```
+
+```bash
+# Dentro de EC2 (Ubuntu)
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y python3.11 python3.11-venv python3-pip git
 
 # Clonar y entrar al proyecto
 git clone https://github.com/jjpalacioz/taller3juanjose.git
 cd taller3juanjose/DjangoProjectBase
 
+# Crear y activar entorno virtual
+python3.11 -m venv venv
+source venv/bin/activate
+
 # Instalar dependencias
-pip install -r requirements.txt  # o ../requirements.txt
+pip install -r requirements.txt
 
-# Crear openAI.env
-echo "openai_apikey=sk-XXXXXXXX" > openAI.env
+# Crear archivo de API key (no subir a git)
+cat > openAI.env << 'EOF'
+openai_apikey=sk-XXXXXXXX
+EOF
 
-# Configurar entorno
+# Configurar variables de entorno
 export DJANGO_DEBUG=False
-export DJANGO_ALLOWED_HOSTS="<PUBLIC_IP>"
+export DJANGO_ALLOWED_HOSTS="<PUBLIC_IP>,<PUBLIC_DNS_OPCIONAL>"
 
-# Migrar y arrancar
-python3.11 manage.py migrate
+# Arrancar app (ejecuta migrate y collectstatic automáticamente)
 ./start_server.sh
 ```
+
+Luego abre en tu navegador:
+`http://<PUBLIC_IP>:8000`
