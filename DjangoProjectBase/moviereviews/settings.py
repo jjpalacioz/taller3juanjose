@@ -28,7 +28,8 @@ MEDIA_URL = '/media/'
 SECRET_KEY = 'django-insecure-+9jg)*p09$at+zck$n-6*djf=34w4sc*m##^fmph4pb$_nh%xb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Set DJANGO_DEBUG=False in the EC2 environment to disable debug mode.
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True') != 'False'
 
 # Add your EC2 public IP here when deploying, e.g. ALLOWED_HOSTS = ['1.2.3.4', '127.0.0.1', 'localhost']
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
