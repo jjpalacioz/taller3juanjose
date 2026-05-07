@@ -232,7 +232,7 @@ pip install -r requirements.txt
 # Crear archivo de API key (no subir a git)
 # IMPORTANTE: reemplaza con tu API key real y asegúrate de no subir openAI.env al repositorio.
 cat > openAI.env << 'EOF'
-openai_apikey=sk-REPLACE_WITH_YOUR_ACTUAL_API_KEY
+openai_apikey=REEMPLAZA_CON_TU_API_KEY_REAL
 EOF
 
 # Configurar variables de entorno
