@@ -24,6 +24,8 @@ Esta guía explica cómo desplegar el proyecto Django de películas en una insta
    | **Key pair** | Crea uno nuevo o selecciona uno existente (guarda el `.pem`) |
    | **Security group** | Permite **SSH (22)** desde tu IP y **HTTP personalizado (8000)** desde `0.0.0.0/0` |
 
+   > ⚠️ Permitir el puerto 8000 desde `0.0.0.0/0` lo expone a Internet. Para una app académica esto es suficiente, pero en producción real usa el puerto 80/443 con nginx y restringe las reglas de acceso.
+
 3. Haz clic en **Launch Instance** y espera a que el estado sea **running**.
 4. Anota la **Public IPv4 address** de la instancia (ej. `34.230.71.87`).
 
