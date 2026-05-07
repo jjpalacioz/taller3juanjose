@@ -230,9 +230,9 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # Crear archivo de API key (no subir a git)
-# IMPORTANTE: reemplaza con tu API key real y nunca subas openAI.env al repositorio.
+# IMPORTANTE: reemplaza con tu API key real y no debes subir openAI.env al repositorio.
 cat > openAI.env << 'EOF'
-openai_apikey=sk-XXXXXXXX
+openai_apikey=YOUR_OPENAI_API_KEY_HERE
 EOF
 
 # Configurar variables de entorno
