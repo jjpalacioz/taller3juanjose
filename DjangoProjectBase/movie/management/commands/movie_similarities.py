@@ -1,9 +1,12 @@
 import os
 import numpy as np
+from pathlib import Path
 from django.core.management.base import BaseCommand
 from movie.models import Movie
 from openai import OpenAI
 from dotenv import load_dotenv
+
+_ENV_FILE = Path(__file__).resolve().parent.parent.parent.parent / 'openAI.env'
 
 
 class Command(BaseCommand):
@@ -11,7 +14,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         # ✅ Load OpenAI API key
-        load_dotenv('../openAI.env')
+        load_dotenv(_ENV_FILE)
         client = OpenAI(api_key=os.environ.get('openai_apikey'))
 
         # ✅ Películas seleccionadas para comparar (puedes cambiarlas)

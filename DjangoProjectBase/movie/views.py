@@ -3,6 +3,7 @@ from django.http import HttpResponse
 
 import numpy as np
 import os
+from pathlib import Path
 from dotenv import load_dotenv
 from openai import OpenAI
 
@@ -12,6 +13,9 @@ import matplotlib.pyplot as plt
 import matplotlib
 import io
 import urllib, base64
+
+# Absolute path to the env file so it works regardless of working directory
+_ENV_FILE = Path(__file__).resolve().parent.parent / 'openAI.env'
 
 def home(request):
     #return HttpResponse('<h1>Welcome to Home Page</h1>')
@@ -135,7 +139,7 @@ def recommendations(request):
     similarity_score = None
 
     if prompt:
-        load_dotenv('openAI.env')
+        load_dotenv(_ENV_FILE)
         client = OpenAI(api_key=os.environ.get('openai_apikey'))
 
         def cosine_similarity(a, b):

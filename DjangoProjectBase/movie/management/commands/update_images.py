@@ -1,9 +1,12 @@
 import os
+from pathlib import Path
 import requests
 from openai import OpenAI
 from django.core.management.base import BaseCommand
 from movie.models import Movie
 from dotenv import load_dotenv
+
+_ENV_FILE = Path(__file__).resolve().parent.parent.parent.parent / 'openAI.env'
 
 
 class Command(BaseCommand):
@@ -11,7 +14,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         # ✅ Load environment variables from the .env file
-        load_dotenv('../openAI.env')
+        load_dotenv(_ENV_FILE)
 
         # ✅ Initialize the OpenAI client with the API key
         client = OpenAI(
