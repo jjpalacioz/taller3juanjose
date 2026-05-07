@@ -34,7 +34,7 @@ DEBUG = os.environ.get('DJANGO_DEBUG', 'True') != 'False'
 # Add extra hosts via the DJANGO_ALLOWED_HOSTS env var (comma-separated), e.g.:
 #   export DJANGO_ALLOWED_HOSTS="1.2.3.4,ec2-1-2-3-4.compute.amazonaws.com"
 _extra_hosts = [h.strip() for h in os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',') if h.strip()]
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost'] + _extra_hosts
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '44.211.148.212'] + _extra_hosts
 
 
 # Application definition
